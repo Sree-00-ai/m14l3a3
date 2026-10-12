@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JavaScript Map Method</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2ff;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .container {
+            background-color: white;
+            padding: 25px;
+            max-width: 450px;
+            margin: auto;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #cccccc;
+        }
+
+        input {
+            width: 85%;
+            padding: 10px;
+            margin: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4f46e5;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #result {
+            color: #3730a3;
+            font-size: 17px;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Array map() Method</h2>
+
+        <p>Enter numbers separated by commas:</p>
+
+        <input type="text" id="numbers" placeholder="Example: 1, 2, 3, 4, 5">
+
+        <br>
+
+        <button onclick="doubleNumbers()">Double Numbers</button>
+
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function doubleNumbers() {
+
+            const input = document.getElementById("numbers").value.trim();
+
+            if (input === "") {
+                document.getElementById("result").textContent =
+                    "Please enter some numbers.";
+                return;
+            }
+
+            const parts = input.split(",");
+
+            if (parts.some(part => part.trim() === "")) {
+                document.getElementById("result").textContent =
+                    "Please enter valid numbers separated by commas.";
+                return;
+            }
+
+            const numbers = parts.map(Number);
+
+            if (numbers.some(number => !Number.isFinite(number))) {
+                document.getElementById("result").textContent =
+                    "Please enter valid numbers only.";
+                return;
+            }
+
+            const doubledNumbers = numbers.map(function (number) {
+                return number * 2;
+            });
+
+            document.getElementById("result").textContent =
+                "Original Array: " + numbers.join(", ") +
+                " | Doubled Array: " + doubledNumbers.join(", ");
+        }
+    </script>
+
+</body>
+
+</html>
